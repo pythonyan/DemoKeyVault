@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Azure.KeyVault;
@@ -29,9 +25,7 @@ namespace DemoKeyVault.Pages
         /// <returns></returns>
         public async Task OnGetAsync()
         {
-            Message = "App di esempio AZure Key Vault.";
-            int retries = 0;
-            bool retry = false;
+
             try
             {
 
@@ -51,18 +45,6 @@ namespace DemoKeyVault.Pages
             }
         }
 
-
-        /// <summary>
-        /// Questo metodo implementa un algoritmo di exponential backoff 
-        /// se riceviamo 429 errore da Azure Key Vault 
-        /// </summary>
-        /// <param name="retryCount">retryCount</param>
-        /// <returns></returns>
-        private static long GetWaitTime(int retryCount)
-        {
-            long waitTime = ((long)Math.Pow(2, retryCount) * 100L);
-            return waitTime;
-        }
 
         // This method fetches a token from Azure Active Directory, which can then be provided to Azure Key Vault to authenticate
         public async Task<string> GetAccessTokenAsync()
